@@ -35,6 +35,10 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  // Declaring controllers to save momentanely values from input
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,15 +65,19 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   TextField(
                     decoration: InputDecoration(labelText: 'Title'),
+                    controller: titleController,
                   ),
                   TextField(
                     decoration: InputDecoration(labelText: 'Amount'),
+                    controller: amountController,
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
                       primary: Colors.purple,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      print(titleController.text);
+                    },
                     child: Text('Add transaction'),
                   )
                 ],
