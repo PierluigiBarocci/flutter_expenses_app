@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
+// import Custom Widgets and Classes
 import 'package:expenses_app/transaction.dart';
 
 void main() => runApp(MyApp());
@@ -70,7 +72,7 @@ class MyHomePage extends StatelessWidget {
                           ),
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            '${tx.amount}',
+                            '\$${tx.amount}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
