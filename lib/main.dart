@@ -91,7 +91,7 @@ class MyHomePage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              tx.date.toString(),
+                              DateFormat('d/M/y - HH:mm').format(tx.date),
                               style: TextStyle(
                                 color: Colors.grey,
                               ),
