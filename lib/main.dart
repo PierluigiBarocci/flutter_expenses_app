@@ -32,7 +32,7 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            height: 250,
+            height: 70,
             width: double.infinity,
             child: Card(
               color: Colors.purple.shade200,
