@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:expenses_app/widgets/chart.dart';
@@ -6,6 +7,15 @@ import 'package:expenses_app/widgets/new_transaction.dart';
 import 'package:expenses_app/widgets/transaction_list.dart';
 import 'package:expenses_app/models/transaction.dart';
 
+///
+// Per non Permettere di cambiare da Portrait a Landscap Mode
+///
+// void main() {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   SystemChrome.setPreferredOrientations(
+//       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+//   runApp(MyApp());
+// }
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
