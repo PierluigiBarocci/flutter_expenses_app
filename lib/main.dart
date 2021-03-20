@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          UserTransaction(),
+          UserTransactions(),
         ],
       ),
     );

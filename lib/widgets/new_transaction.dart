@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NewTransaction extends StatelessWidget {
+  // expeting a function
+  final Function addTx;
+  NewTransaction(this.addTx);
   // Declaring controllers to save momentanely values from input
   final titleController = TextEditingController();
   final amountController = TextEditingController();
@@ -27,7 +30,10 @@ class NewTransaction extends StatelessWidget {
                 primary: Colors.purple,
               ),
               onPressed: () {
-                print(titleController.text);
+                addTx(
+                  titleController.text,
+                  double.parse(amountController.text),
+                );
               },
               child: Text('Add transaction'),
             )
