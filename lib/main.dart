@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:expenses_app/widgets/chart.dart';
@@ -28,6 +28,9 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber,
           fontFamily: GoogleFonts.quicksand().fontFamily,
           textTheme: ThemeData.light().textTheme.copyWith(
+                bodyText2: TextStyle(
+                  fontFamily: GoogleFonts.quicksand().fontFamily,
+                ),
                 headline6: TextStyle(
                   fontFamily: GoogleFonts.openSans().fontFamily,
                   fontWeight: FontWeight.bold,
@@ -69,6 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
     //   date: DateTime.now(),
     // ),
   ];
+
+  bool _showChart = false;
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -119,6 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text(
         'Expenses Tracker App',
@@ -130,25 +137,53 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ],
     );
+    final txListWidget = Container(
+      height: (MediaQuery.of(context).size.height -
+              appBar.preferredSize.height -
+              MediaQuery.of(context).padding.top) *
+          0.7,
+      child: TransactionList(_userTransactions, _deleteTransaction),
+    );
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: (MediaQuery.of(context).size.height -
-                      appBar.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
-                  0.3,
-              child: Chart(_recentTransactions),
-            ),
-            Container(
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('ShowChart', style: TextStyle()),
+                  // fontFamily: GoogleFonts.quicksand().fontFamily)),
+                  Switch(
+                      value: _showChart,
+                      onChanged: (val) {
+                        setState(() {
+                          _showChart = val;
+                        });
+                      })
+                ],
+              ),
+            if (!isLandscape)
+              Container(
                 height: (MediaQuery.of(context).size.height -
                         appBar.preferredSize.height -
                         MediaQuery.of(context).padding.top) *
-                    0.7,
-                child: TransactionList(_userTransactions, _deleteTransaction)),
+                    0.3,
+                child: Chart(_recentTransactions),
+              ),
+            if (!isLandscape) txListWidget,
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.7,
+                      child: Chart(_recentTransactions),
+                    )
+                  : txListWidget,
           ],
         ),
       ),
